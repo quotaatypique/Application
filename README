@@ -1,0 +1,6 @@
+Comme je connais mieux le php que je javascript, j'ai regardé comment coder l'application dans les deux langages. 
+Voilà donc une version en php, il ne manque plus que donner aux <div> une hauteur dynamique en fonction du nombre de tweeys et je pense qu'on y est.
+
+Je vais essayer de voir si je peux reproduire la même chose en javascript - mais de toute façon il y aura du javascript je pense, puisque le redimensionnement dynamique des </div> va se faire avec jquery je pense.
+
+ça marche, en tout cas, le principe est là  \o/
