@@ -1,0 +1,122 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
+   <link rel="stylesheet" href="sencha-touch.css" type="text/css">
+
+    <title>Up Sandwhich</title>
+    <script type="text/javascript" src="sencha-touch.js"></script>
+	<script type="text/javascript" src="touch-chart.js"></script>
+	<script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
+
+</head>
+<body style='background-color:#ccc;'>
+
+<script type="text/javascript">
+
+var App = new Ext.Application({
+    name: 'UpSandwich',
+    useLoadMask: true,
+    launch: function () {
+
+// lancement de l'application
+
+        UpSandwich.views.notesListToolbar = new Ext.Toolbar({
+            id: 'notesListToolbar',
+            title: 'Up Sandwhich'
+    });
+
+// titre de l'application
+
+// là on va définir la barre d'outils du bas
+
+	UpSandwich.views.noteEditorBottomToolbar = new Ext.Toolbar({
+    dock: 'bottom',
+	layout:{
+        align: 'center'
+    	   },
+    items: [
+ 			{xtype: 'spacer'},
+
+			{
+	    	text : 'Voir les résultats',
+            iconCls: 'action',
+            iconMask: true,
+            handler: function () {
+
+				$.getJSON("http://otter.topsy.com/searchcount.json?q=%23misc12&type=tweet&callback=?",
+				function (response){
+				x = response.response.a;
+				$('#UpEpice').width(x);
+				});
+
+				$.getJSON("http://otter.topsy.com/searchcount.json?q=%23misc11&type=tweet&callback=?",
+				function (response2){
+				y = response2.response.a;
+				$('#UpDouceur').width(y);
+				});
+								}
+// On appelle JQuery pour parser le décompte, parce que ça prend 2 lignes dans jQuery et que c'est compatible avec Sencha
+// J'avoue avoir un souci avec les variables, ce qui m'a empêché de transformer le décompte en % de l'espace total, du coup l'affichage 
+// est pas trèès beau.
+
+        },
+
+        {
+	    text : 'Télécharger la carte',
+            iconCls: 'download',
+            iconMask: true,
+            handler: function () {
+ 			{window.open('http://www.steelcitysandwich.com/#329/custom_plain')}
+            					 }
+        },
+		
+		{
+	    text : 'Notre site web',
+            iconCls: 'info',
+            iconMask: true,
+            handler: function () {
+			{window.open('http://www.steelcitysandwich.com/')}
+            					 }
+        },
+		
+		{
+	    text : '@SteelCitySndwch sur Twitter',
+            iconCls: 'star',
+            iconMask: true,
+            handler: function () {
+ 			{window.open('https://twitter.com/#!/SteelCitySndwch')}
+            					 }
+        },
+
+		{xtype: 'spacer'}
+
+	    ]
+	});
+
+    UpSandwich.views.notesListContainer = new Ext.Panel({
+            id: 'notesListContainer',
+            layout: 'fit',
+			html: '<div style="width:80%;margin:auto;"><div id="UpEpice" style="background:#ccc;height:100%;width:50%;float:left;"></div><div id="UpDouceur" style="background:#aaa;height:100%;width:50%;float:left;margin-right:auto;"></div></div>',
+			dockedItems: [UpSandwich.views.notesListToolbar,UpSandwich.views.noteEditorBottomToolbar]
+    });
+
+// Là on dit à Sencha tous les éléments qui composent la page
+
+    UpSandwich.views.viewport = new Ext.Panel({
+            fullscreen: true,
+            layout: 'card',
+            cardAnimation: 'slide',
+            items: [UpSandwich.views.notesListContainer]
+    });
+
+// Et là on les appelle
+
+    }
+});
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+.x-toolbar-dark {
+background-color: #F9D82F;
+background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #F9D82F), color-stop(2%, ##F9D82F), color-stop(100%, #E4C006));
+background-image: -webkit-linear-gradient(#5a81af,#304864 2%,#192533);
+background-image: linear-gradient(#5a81af,##F9D82F 2%,##F9D82F);
+border-color: #F9D82F;
+}
