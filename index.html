@@ -10,9 +10,11 @@
 	<script type="text/javascript" src="jquery/jquery-1.6.2.min.js"></script>
 
 </head>
-<body style='background-color:#ccc;'>
+<body style='background-color:#fff;'>
 
 <script type="text/javascript">
+
+var  total = 0;
 
 var App = new Ext.Application({
     name: 'UpSandwich',
@@ -43,17 +45,19 @@ var App = new Ext.Application({
             iconCls: 'action',
             iconMask: true,
             handler: function () {
-
+total = 0;
 				$.getJSON("http://otter.topsy.com/searchcount.json?q=%23misc12&type=tweet&callback=?",
 				function (response){
 				x = response.response.a;
 				$('#UpEpice').width(x);
+				total = x;	
 				});
 
 				$.getJSON("http://otter.topsy.com/searchcount.json?q=%23misc11&type=tweet&callback=?",
 				function (response2){
 				y = response2.response.a;
 				$('#UpDouceur').width(y);
+total = total + y
 				});
 								}
 // On appelle JQuery pour parser le décompte, parce que ça prend 2 lignes dans jQuery et que c'est compatible avec Sencha
@@ -97,7 +101,7 @@ var App = new Ext.Application({
     UpSandwich.views.notesListContainer = new Ext.Panel({
             id: 'notesListContainer',
             layout: 'fit',
-			html: '<div style="width:80%;margin:auto;"><div id="UpEpice" style="background:#ccc;height:100%;width:50%;float:left;"></div><div id="UpDouceur" style="background:#aaa;height:100%;width:50%;float:left;margin-right:auto;"></div></div>',
+			html: '<div style="width:80%;margin:auto;"><div id="UpEpice" style="background:url(img-sndwisch1.jpg);background-position:left;height:100%;width:50%;float:left;"></div><div id="UpDouceur" style="background:url(img-sndwisch2.jpg);background-position:right;height:100%;width:50%;float:left;margin-right:auto;"></div></div>',
 			dockedItems: [UpSandwich.views.notesListToolbar,UpSandwich.views.noteEditorBottomToolbar]
     });
 
